@@ -5,8 +5,8 @@ export const Context = createContext(null);
 export const GameContext = ({ children }) => {
     const [gameData, setGameData] = useState({
         remainTargets: {
-            player: [43, 53, 63],
-            cpu: [31, 32, 33]
+            player: [43, 53, 63, 15, 16, 92, 93, 94, 95],
+            cpu: [31, 32, 33, 20, 30, 40, 50, 81, 82]
         },
         cpuTurn: false,
         playing: true,
@@ -34,9 +34,22 @@ export const GameContext = ({ children }) => {
                 playing: false,
                 winner: playerWinner
             }));
+        },
+        restart: () => {
+            setGameData(() => ({
+                remainTargets: {
+                    player: [43, 53, 63, 15, 16, 92, 93, 94, 95],
+                    cpu: [31, 32, 33, 20, 30, 40, 50, 81, 82]
+                },
+                cpuTurn: false,
+                playing: true,
+                winner: ''
+            }));
+            cpuActions.resetMemory();
         }
     });
     const [cpuData, setCpuData] = useState({
+        // propiedad pensada para mejorar la ia(aún en progreso)
         targetRecord: [],
         remainSpots: Array.from({ length: 100 }, (_, index) => index)
     });
@@ -48,6 +61,12 @@ export const GameContext = ({ children }) => {
                 remainSpots: prev.remainSpots.filter(item => item != target)
             }));
             gameActions.changeTurn();
+        },
+        resetMemory: () => {
+            setCpuData(() => ({
+                targetRecord: [],
+                remainSpots: Array.from({ length: 100 }, (_, index) => index)
+            }));
         }
     });
 

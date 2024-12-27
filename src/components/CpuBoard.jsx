@@ -9,6 +9,7 @@ const CpuBoard = ({ }) => {
 
     const cpuPlay = useCallback((remainSpots) => {
         if (playing.current) {
+            // pendiente en mejorar la ia para utilizar los ultimos disparos efectivos e intentar disparar alrededor para terminar de hundir un barco
             const targetIndex = Math.floor(Math.random() * remainSpots.length);
             const targetPosition = remainSpots[targetIndex];
             setBoard(prev => {
