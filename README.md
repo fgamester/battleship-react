@@ -3,7 +3,7 @@ Hello there people, I want to share with you my Battleship project, the classic 
 
 ## Want to try it?
 ### Try it live
-(waiting for the deployed project link)
+[Click here to open it in Vercel](https://battleship-react-lyart.vercel.app)
 
 ### Get the repository for yourself
 First of all, clone the repository to your local workspace:
