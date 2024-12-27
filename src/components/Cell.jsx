@@ -1,18 +1,14 @@
 import { useState, memo, useCallback, useContext, useEffect } from 'react'
 import { Context } from '../context/GameContext';
 
-const Cell = ({ position, targets, playerTarget, attacked, attack, cpuTurn, playing }) => {
+const Cell = ({ position, targets, playerTarget, attacked, attack, cpuTurn, player, playing = false }) => {
     const [targetAttacked, setTargetAttacked] = useState('water')
     const { gameActions } = useContext(Context);
 
     const fire = useCallback(() => {
         if (!attacked) {
             gameActions.changeTurn();
-            attack(prev => {
-                const newList = [...prev];
-                newList[position] = true;
-                return newList;
-            });
+            attack(position, player);
         }
     }, [attacked]);
 
@@ -25,6 +21,8 @@ const Cell = ({ position, targets, playerTarget, attacked, attack, cpuTurn, play
                 setTargetAttacked(() => 'missed');
             }
             console.log(`${position + 1}th position attacked in ${playerTarget} territory`);
+        } else {
+            setTargetAttacked(() => 'water');
         }
     }, [attacked])
 
@@ -35,4 +33,4 @@ const Cell = ({ position, targets, playerTarget, attacked, attack, cpuTurn, play
     )
 }
 
-export default Cell;
+export default memo(Cell);

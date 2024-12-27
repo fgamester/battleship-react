@@ -1,15 +1,9 @@
-import { memo, useContext, useEffect, useState, useRef } from 'react'
+import { memo, useContext, useEffect, useRef } from 'react'
 import Cell from './Cell'
 import { Context } from '../context/GameContext';
 
 const PlayerBoard = ({ }) => {
-    const [board, setBoard] = useState(Array(100).fill(false));
     const { gameData, gameActions } = useContext(Context);
-    const playing = useRef(gameData.playing);
-
-    useEffect(() => {
-        playing.current = gameData.playing;
-    }, [gameData.playing]);
 
     useEffect(() => {
         if (gameData.remainTargets.cpu.length == 0) {
@@ -19,7 +13,7 @@ const PlayerBoard = ({ }) => {
 
     return (
         <div id='game-board'>
-            {board.map((item, index) => <Cell key={index} attacked={item} attack={setBoard} position={index} targets={gameData.remainTargets.cpu} playerTarget='cpu' cpuTurn={gameData.cpuTurn} playing={playing.current} />)}
+            {gameData.board.player.map((item, index) => <Cell key={index} attacked={item} attack={gameActions.attack} position={index} targets={gameData.remainTargets.cpu} playerTarget='cpu' player='player' cpuTurn={gameData.cpuTurn} playing={gameData.playing} />)}
         </div>
     )
 }

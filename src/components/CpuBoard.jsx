@@ -12,11 +12,7 @@ const CpuBoard = ({ }) => {
             // pendiente en mejorar la ia para utilizar los ultimos disparos efectivos e intentar disparar alrededor para terminar de hundir un barco
             const targetIndex = Math.floor(Math.random() * remainSpots.length);
             const targetPosition = remainSpots[targetIndex];
-            setBoard(prev => {
-                const newList = [...prev];
-                newList[targetPosition] = true;
-                return newList;
-            });
+            gameActions.attack(targetPosition, 'cpu')
             cpuActions.confirmAttack(targetPosition);
         }
     }, [gameData.playing])
@@ -40,7 +36,7 @@ const CpuBoard = ({ }) => {
 
     return (
         <div id='game-board'>
-            {board.map((item, index) => <Cell key={index} attacked={item} attack={setBoard} position={index} targets={gameData.remainTargets.player} playerTarget='player' cpuTurn={gameData.cpuTurn} playing={gameData.playing} />)}
+            {gameData.board.cpu.map((item, index) => <Cell key={index} attacked={item} position={index} targets={gameData.remainTargets.player} playerTarget='player' player='cpu' cpuTurn={gameData.cpuTurn} />)}
         </div>
     )
 }

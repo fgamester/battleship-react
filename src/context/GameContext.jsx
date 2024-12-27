@@ -4,6 +4,10 @@ export const Context = createContext(null);
 
 export const GameContext = ({ children }) => {
     const [gameData, setGameData] = useState({
+        board: {
+            player: Array(100).fill(false),
+            cpu: Array(100).fill(false)
+        },
         remainTargets: {
             player: [43, 53, 63, 15, 16, 92, 93, 94, 95],
             cpu: [31, 32, 33, 20, 30, 40, 50, 81, 82]
@@ -37,6 +41,10 @@ export const GameContext = ({ children }) => {
         },
         restart: () => {
             setGameData(() => ({
+                board: {
+                    player: Array(100).fill(false),
+                    cpu: Array(100).fill(false)
+                },
                 remainTargets: {
                     player: [43, 53, 63, 15, 16, 92, 93, 94, 95],
                     cpu: [31, 32, 33, 20, 30, 40, 50, 81, 82]
@@ -46,6 +54,17 @@ export const GameContext = ({ children }) => {
                 winner: ''
             }));
             cpuActions.resetMemory();
+        },
+        attack: (target, playerBoard) => {
+            setGameData(prev => ({
+                ...prev,
+                board: {
+                    ...prev.board,
+                    [playerBoard]: [
+                        ...prev.board[playerBoard].map((cell, index) => index === target ? true : cell)
+                    ]
+                }
+            }));
         }
     });
     const [cpuData, setCpuData] = useState({
