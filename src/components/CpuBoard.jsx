@@ -1,9 +1,8 @@
-import { memo, useContext, useState, useEffect, useCallback, useRef } from 'react'
+import { memo, useContext, useEffect, useCallback, useRef } from 'react'
 import Cell from './Cell'
 import { Context } from '../context/GameContext';
 
 const CpuBoard = ({ }) => {
-    const [board, setBoard] = useState(Array(100).fill(false));
     const { gameData, cpuData, cpuActions, gameActions } = useContext(Context);
     const playing = useRef(gameData.playing);
 

@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect, useRef } from 'react'
+import { memo, useContext, useEffect } from 'react'
 import Cell from './Cell'
 import { Context } from '../context/GameContext';
 

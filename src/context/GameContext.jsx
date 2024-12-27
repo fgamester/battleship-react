@@ -10,7 +10,7 @@ export const GameContext = ({ children }) => {
         },
         remainTargets: {
             player: [43, 53, 63, 15, 16, 92, 93, 94, 95],
-            cpu: [31, 32, 33, 20, 30, 40, 50, 81, 82]
+            cpu: [32, 33, 34, 20, 30, 40, 50, 81, 82]
         },
         cpuTurn: false,
         playing: true,
@@ -32,7 +32,7 @@ export const GameContext = ({ children }) => {
                 cpuTurn: !prev.cpuTurn
             }));
         },
-        gameOver: (playerWinner) => { 
+        gameOver: (playerWinner) => {
             setGameData(prev => ({
                 ...prev,
                 playing: false,
@@ -47,7 +47,7 @@ export const GameContext = ({ children }) => {
                 },
                 remainTargets: {
                     player: [43, 53, 63, 15, 16, 92, 93, 94, 95],
-                    cpu: [31, 32, 33, 20, 30, 40, 50, 81, 82]
+                    cpu: [32, 33, 34, 20, 30, 40, 50, 81, 82]
                 },
                 cpuTurn: false,
                 playing: true,
@@ -65,6 +65,9 @@ export const GameContext = ({ children }) => {
                     ]
                 }
             }));
+        },
+        placeShip: () => {
+            // funcion pendiente para posicionar barcos de manera manual
         }
     });
     const [cpuData, setCpuData] = useState({
@@ -86,6 +89,9 @@ export const GameContext = ({ children }) => {
                 targetRecord: [],
                 remainSpots: Array.from({ length: 100 }, (_, index) => index)
             }));
+        },
+        placeShip: () => {
+            //funcion pendiente para que la cpu posicione sus barcos de manera aleatoria
         }
     });
 

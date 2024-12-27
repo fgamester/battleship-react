@@ -8,8 +8,6 @@ import '../src/styles/Game.css';
 const Game = () => {
     const { gameActions, gameData } = useContext(Context);
 
-
-
     return (
         <div id="game">
             <PlayerBoard />
