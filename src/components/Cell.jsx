@@ -1,27 +1,38 @@
-import { useState, memo, useCallback } from 'react'
+import { useState, memo, useCallback, useContext, useEffect } from 'react'
+import { Context } from '../context/GameContext';
 
-const Cell = memo(({ position, targets, hit }) => {
-    const [attacked, setAttacked] = useState(false);
-    const [targetAttacked, setTargetAttacked] = useState('')
+const Cell = ({ position, targets, playerTarget, attacked, attack, cpuTurn, playing }) => {
+    const [targetAttacked, setTargetAttacked] = useState('water')
+    const { gameActions } = useContext(Context);
 
     const fire = useCallback(() => {
         if (!attacked) {
-            setAttacked(_ => true);
+            gameActions.changeTurn();
+            attack(prev => {
+                const newList = [...prev];
+                newList[position] = true;
+                return newList;
+            });
+        }
+    }, [attacked]);
+
+    useEffect(() => {
+        if (attacked) {
             if (targets.some(item => item == position)) {
-                hit(prev => prev.filter(item => item != position));
+                gameActions.shipHit(playerTarget, position)
                 setTargetAttacked(() => 'ship-hit');
             } else {
                 setTargetAttacked(() => 'missed');
             }
-            console.log(position);
+            console.log(`${position + 1}th position attacked in ${playerTarget} territory`);
         }
-    }, [attacked]);
+    }, [attacked])
 
     return (
-        <div onClick={fire} className={`game-cell ${!attacked && 'water'} ${targetAttacked}`}>
+        <div {...(playing && !cpuTurn && playerTarget == 'cpu') && { onClick: fire }} className={`game-cell ${targetAttacked}`}>
 
-        </div>
+        </div >
     )
-});
+}
 
 export default Cell;

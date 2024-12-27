@@ -1,3 +1,8 @@
+#game {
+    display: flex;
+    gap: 1rem;
+}
+
 #game-board {
     display: grid;
     grid-template-columns: repeat(10, min-content);
@@ -12,14 +17,14 @@
     border: 1px solid black;
 }
 
-.missed {
-    background-color: grey;
-}
-
 .water {
     background-color: cornflowerblue;
 }
 
+.missed {
+    background-color: grey;
+}
+
 .ship-hit {
-    background-color: chocolate;
+    background-color: red;
 }
