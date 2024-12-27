@@ -32,7 +32,7 @@ export const GameContext = ({ children }) => {
                 cpuTurn: !prev.cpuTurn
             }));
         },
-        gameOver: (playerWinner) => {
+        gameOver: (playerWinner) => { 
             setGameData(prev => ({
                 ...prev,
                 playing: false,
